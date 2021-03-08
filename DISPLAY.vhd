@@ -41,11 +41,11 @@ presc_1hz_process: process(CLK)
 begin
 	if (CLK='1' and CLK'event)then
 		
-		if c100M = 499 then --49.999.999
+		if c100M = 49999999 then --49999999
 			presc_1hz<='1';
 			c100M<=c100M+1;
 			
-		elsif c100M = 999 then --99.999.999
+		elsif c100M = 99999999 then --99999999
 			presc_1hz<='0';
 			c100M<=(others=>'0');
 		else
@@ -58,7 +58,7 @@ end process;
 presc_200hz_process: process(CLK)
 begin
 	if (CLK='1' and CLK'event)then
-		if c500k = 19 then --49999999
+		if c500k = 499999 then
 			presc_200hz<='1';
 			c500k<=(others=>'0');
 		else
@@ -86,10 +86,10 @@ end process;
 
 with c_xif select SD <=
 	
-	"0001" when "000",
-	"0010" when "001",
-	"0100" when "010",
-	"1000" when "011",
+	"1110" when "000",
+	"1101" when "001",
+	"1011" when "010",
+	"0111" when "011",
 	"1111" when others;
 
 
@@ -118,7 +118,7 @@ with number select SSEG_AUX <=
 	"1111111" when others;
 
 
-SECS <= '1' when (presc_1hz='1' and c_xif=2) else '0';
+SECS <= '0' when (presc_1hz='1' and c_xif=2) else '1';
 
 
 SSEG <= SSEG_AUX & SECS when enable='1' else "11111111";

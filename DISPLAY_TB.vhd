@@ -38,19 +38,6 @@ begin
 		CLK <= not CLK;
 
 		if timebase = 100 then ENABLE<='1';end if;
---		if timebase = 100 then SET<='1'; end if;
---		if timebase = 150 then SET<='0'; end if;
---		
---		if timebase = 4000 then SET<='1'; end if;
---		if timebase = 9000 then SET<='0'; end if;
---		
---
---		if timebase = 800 then UP<='1'; end if;
---		if timebase = 1000 then UP<='0'; end if;
---		
---		if timebase = 5000 then UP<='1'; end if;
---		if timebase = 11000 then UP<='0'; end if;
---	
 		timebase <= timebase + 1;
 	end process;
 

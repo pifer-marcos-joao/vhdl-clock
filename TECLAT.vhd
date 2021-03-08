@@ -25,7 +25,7 @@ signal presc_3hz: std_logic:='0'; -- Prescaler per incrementar amb frequencia de
 signal c33M: std_logic_vector(25 downto 0):= (others=>'0');
 
 
-signal SET_5s,UP_5s,DOWN_5s: std_logic_vector(2 downto 0):= (others=>'0'); -- Comptadors de tecla pitjada 5s
+signal SET_5s,UP_5s,DOWN_5s,OK_5s: std_logic_vector(2 downto 0):= (others=>'0'); -- Comptadors de tecla pitjada 5s
 signal speed: std_logic:='0'; -- Modes de velocitat d'increment '0'(increment per pitjada) y '1' increment a 3Hz
 
 
@@ -37,7 +37,7 @@ process_presc_1hz: process(CLK)
 begin
 	if (CLK='1' and CLK'event)then
 		
-		if c100M = 999 then --99999999
+		if c100M = 99999999 then --99999999
 			presc_1hz<='1';
 			c100M<=(others=>'0');
 		else
@@ -51,7 +51,7 @@ presc_3hz_process: process(CLK)
 begin
 	if (CLK='1' and CLK'event)then
 		
-		if c33M = 333 then --33333333
+		if c33M = 33333333 then --33333333
 			presc_3hz<='1';
 			c33M<=(others=>'0');
 		else
@@ -83,9 +83,7 @@ begin
 			when P0 =>
 				ESTAT<=P1;
 				
-				if OK='1' then
-					TECLA<="0100";
-				elsif UP='1' then
+				if UP='1' then
 					TECLA<="0010";
 				elsif DOWN='1' then
 					TECLA<="0001";
@@ -140,7 +138,16 @@ begin
 					end if;
 					ESTAT<= P1;
 				elsif OK='1' then
-					TECLA <= "0000";
+				    if presc_1hz='1' then
+                        if OK_5s = 4 then
+                             TECLA <= "0100";
+                        else
+                             OK_5s <= OK_5s +1;
+                        end if;
+                    else 
+                        TECLA <= "0000";
+                    end if;
+					
 					ESTAT<= P1;
 				else
 					TECLA <= "0000";

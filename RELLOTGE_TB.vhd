@@ -71,7 +71,7 @@ begin
 		if timebase = 45000 then DOWN<='0'; end if;
 
 		if timebase = 50000 then OK<='1'; end if;
-		if timebase = 51000 then OK<='0'; end if;
+		if timebase = 56000 then OK<='0'; end if;
 		
 	
 		timebase <= timebase + 1;

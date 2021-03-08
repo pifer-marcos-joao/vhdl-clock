@@ -82,7 +82,7 @@ DSPLY: DISPLAY port map(
 presc_1hz_process: process(CLK)
 begin
 	if (CLK='1' and CLK'event)then
-		if c100M = 999 then --99999999
+		if c100M = 99999999 then --99999999
 			presc_1hz<='1';
 			c100M<=(others=>'0');
 		else
@@ -95,10 +95,10 @@ end process;
 presc_1hz_DC50_process: process(CLK)
 begin
 	if (CLK='1' and CLK'event)then
-		if c100M_dc50 = 499 then --49999999
+		if c100M_dc50 = 49999999 then --49999999
 			presc_1hz_dc50<='1';
 			c100M_dc50<=c100M_dc50+1;
-		elsif c100M_dc50 = 999 then --99999999
+		elsif c100M_dc50 = 99999999 then --99999999
 			c100M_dc50<=(others=>'0');
 			presc_1hz_dc50<='0';
 		else
@@ -114,6 +114,7 @@ begin
 		case ESTAT is
 
 			when RELOJ =>
+			    ENABLE<='1';
 				if TECLA="1000" then -- SET
 					ESTAT <= CONFIG;
 					S<=(others=>'0');
@@ -154,7 +155,11 @@ begin
 				end if;
 					
 			when ASC   =>
-				ENABLE<='1';
+			    if presc_1hz_dc50='1' then
+                    ENABLE<='0';
+                else
+                    ENABLE<='1';
+                end if;
 				if TECLA="0100" then -- OK
 					ESTAT <= RELOJ;
 				elsif TECLA="0010" then -- UP
@@ -205,6 +210,11 @@ begin
 				end if;
 
 			when DESC  =>
+			    if presc_1hz_dc50='1' then
+                        ENABLE<='0';
+                else
+                        ENABLE<='1';
+                end if;
 				if TECLA="0100" then -- OK
 					ESTAT <= RELOJ;
 				elsif TECLA="0010" then -- UP
