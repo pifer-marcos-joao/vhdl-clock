@@ -12,9 +12,9 @@ This project was made in Digital Electronics subject in Escola d'Enginyeria de B
 
 ![](images/inputs-display.PNG)
 
-
 CLOCK FINITE STATES MACHINE
-![](images/clock-FSM.PNG)
+
+![](images/system_fsm.png)
 
 ## Specifications
 
