@@ -2,7 +2,7 @@
 
 This project was made in Digital Electronics subject in Escola d'Enginyeria de Barcelona Est. The purpose of this project is to create a basic configurable clock using VHDL in order to implement this system to a FPGA BASYS 3.
 
-PROJECT REQUIREMENTS
+## Requirements
 
 - The architecture must have 4 inputs in order to configure and set the time: SET,OK,UP,DOWN.
 - The time must be shown in HH:MM format.
@@ -13,7 +13,7 @@ PROJECT REQUIREMENTS
 CLOCK FINITE STATES MACHINE
 ![](images/clock-FSM.PNG
 
-PROJECT SPECIFICATIONS
+## Specifications
 
 SET BUTTON
 - Sets the system to configuration state, making the display blink at 1Hz.
@@ -37,3 +37,22 @@ INPUT CLK
  
  OUTPUT SSEG
  - 8 bits output which indicates active segment on each display.
+
+
+## Architecture
+
+TECLAT (KEYBOARD) subsystem
+
+This block is in charge of managing each button FSM and sends the preprocessed input signals from the system inputs to the internal subsystem DISPLAY.
+
+DISPLAY
+
+This block is in charge of managing the pseudo decoder in order to show the correspondent number to each digit on its correspondent display.
+
+RELLOTGE (CLOCK) subsystem
+
+Higher system which manages all the subsystems signals.
+
+
+
+* Some simulations included in images folder.
