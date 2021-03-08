@@ -10,8 +10,11 @@ This project was made in Digital Electronics subject in Escola d'Enginyeria de B
 - The clock must work cyclically, going from 23:59 to 00:00
 - The clock must work according to the following FSM.
 
+![](images/inputs-display.PNG)
+
+
 CLOCK FINITE STATES MACHINE
-![](images/clock-FSM.PNG
+![](images/clock-FSM.PNG)
 
 ## Specifications
 
